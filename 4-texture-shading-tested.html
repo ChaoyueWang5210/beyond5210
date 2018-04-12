@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title>Texture shading</title>
+<script type="text/javascript" src="lib/three.min.js"></script>
+<script type="text/javascript" src="lib/OrbitControls2.js"></script>
+<script type="text/javascript" src="4-texture-shading-tested.js"></script>
+
+</head>
+<body onload="init()">
+
+<div style="float:left">
+   <canvas width=600 height=600 id="cnvs" style="background-color:black"></canvas>    
+</div>
+
+<div style="float:left; margin-left:1.5cm">
+<p style="text-indent:-1cm"><b>images:</b><br>
+    <input type=radio name="pickskybox" id=s1 onchange="createSkybox(0)"> <label for="s1">images1</label><br>
+    <input type=radio name="pickskybox" id=s2 onchange="createSkybox(1)"> <label for="s2">images2</label><br>
+    <input type=radio name="pickskybox" id=s3 onchange="createSkybox(2)"> <label for="s3">images3</label><br>
+    <input type=radio name="pickskybox" id=s4 onchange="createSkybox(3)"> <label for="s4">images4</label>
+</p>
+<p style="text-indent:-1cm; margin-top:1.5cm"><b>Model:</b><br>
+    <input type=radio name="pickmodel" id=m4 onchange="installModel(0)"> <label for="m4">Cube</label><br>
+    <input type=radio name="pickmodel" id=m5 onchange="installModel(1)"> <label for="m5">Cylinder</label><br>
+    <input type=radio name="pickmodel" id=m6 onchange="installModel(2)"> <label for="m6">Torus</label><br>
+    <input type=radio name="pickmodel" id=m7 onchange="installModel(3)"> <label for="m7">Sphere</label>
+</p>
+<p style="text-indent:-1cm; margin-top:1.5cm"><b>Object Base Color:</b><br>
+    <input type=radio name="pickcolor" id=c1 onchange="setObjectColor(0)"> <label for="c1">White</label><br>
+    <input type=radio name="pickcolor" id=c2 onchange="setObjectColor(1)"> <label for="c2">Blue</label><br>
+    <input type=radio name="pickcolor" id=c3 onchange="setObjectColor(2)"> <label for="c3">Pink</label><br>
+    <input type=radio name="pickcolor" id=c4 onchange="setObjectColor(3)"> <label for="c4">Green</label>
+</p>
+<p style="text-indent:-1cm; margin-top:1.5cm"><button id=bttn onclick="resetRotation()">Reset Object Rotateion</button>
+</p>
+</div>
+
+</body>
+
+</html>

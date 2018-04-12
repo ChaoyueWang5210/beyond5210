@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Clipping</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 12px;
+				background-color: #CCCCCC;
+				margin: 0px;
+				overflow: hidden;
+				margin: 10px;
+			}
+
+	    	div#drawing {
+				cursor: pointer;
+			}
+			.button{
+		    background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+		}
+		</style>
+	</head>
+	<body>
+
+	<div class="container">
+		View volume location (x, y ,z): <input type="text" id="view_volume" value="10,50,10"><br>
+		View volume size (width, height ,depth): <input type="text" id="view_size" value="250,150,150"><br>
+		Object location (x, y ,z): <input type="text" id="object" value="10,100,10"><br>
+		Object size (width, height ,depth): <input type="text" id="object_size" value="200,150,80"><br>
+		<button id="ShowTimeBtn" class="button" style="font-size: 1.5em;">Show Time!</button>
+		<div style="font-size: 2.4em;">Drag your mouse to view 3D perspective</div>
+	</div>
+	<div id="drawing"></div>
+
+<script src="lib/three.max.js"></script>
+<script src="lib/THREEx.WindowResize.js"></script>
+<script src="lib/Detector.js"></script>
+<script src="lib/OrbitControls1.js"></script>
+<script src="4-clipping-tested.js"></script>
+	</body>
+</html>

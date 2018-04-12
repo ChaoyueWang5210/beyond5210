@@ -1,0 +1,68 @@
+
+
+<html>
+    <head>
+        <script type="text/javascript" src="lib/three.js"></script>
+		 <style>
+		.button{
+		    background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+		}
+		</style>
+
+        
+    </head>
+    
+    <body style="background-color:#BBBBBB">
+    2. Write a program that will:<br/>
+    (a) take as input the cake's radius r, height h, the relation- ship wv, and the number of slices n, and report the weight of the approximation as a percentage of the true weight of the cake:
+	<br/>
+    <form style="text-align:center">
+  radius: <input type="text" id="radius" size="10" value=6>
+  height: <input type="text" id="height" size="10" value=6>
+  n_slices: <input type="text" id="n_slices" size="10" value=6>
+  w_v: <input type="text" id="w_v" size="10" value=6><br>
+  <p id="demo"></p>
+  <input type="button" class="button" id="sub" value="answer"> 
+	
+<br/>
+(b) take as input the difference as a percentage of the radius r, and report the number of slices n that will provide the closest approximation;
+<br/>
+    
+  radius: <input type="text" id="radius" size="10" value=6>
+  difference_radio: <input type="text" id="height" size="10" value=6>
+  <p id="report_slices"></p>
+  <input type="button" class="button" id="cal_slices" value="answer"> 
+	
+<br/>
+(c) take as inputs the center c (in 3D), the radius r, an angle 0 to 360 , a height h, and an difference, and draw a slice (Figure 5) and its polygon approximation (Figure 6).
+   <br/>
+    
+  center: 
+  x:<input type="text" id="center_x" size="10" value=0>
+  y:<input type="text" id="center_y" size="10" value=0>
+  z:<input type="text" id="center_z" size="10" value=0><br>
+  radius_draw: <input type="text" id="radius_draw" size="10" value=2><br>
+  height_draw: <input type="text" id="height_draw" size="10" value=0.5><br>
+  angle_draw: <input type="text" id="angle_draw" size="10" value=50><br>
+  difference: <input type="text" id="difference_draw" size="10" value=0.4><br>
+  <input type="button" class="button" id="sub3" value="Cake!"> 
+	</form>
+<br/>
+<p align="center">
+<canvas id="Canvas" width="800px" height="300px" style="background-color:white"></canvas> 
+</p>
+<script type="text/javascript" src="3-cakes-tested.js"></script>
+
+
+        </script>
+    </body>
+</html>
