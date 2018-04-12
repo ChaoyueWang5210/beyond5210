@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Q3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="js/three.js"></script>
+<link rel="shortcut icon" href="">
+<style type="text/css">
+container {margin: 0px;}
+input {width: 500px;}
+</style>
+</head>
+<body>
+
+<div class="container">
+	x: <input type="text" id="x" value="12,12,13,14,15,16,17,18,19,10,11,12,13,14,15,18,25"><br>
+	y: <input type="text" id="y" value="11,13,14,16,15,14,15,16,18,19,18,17,16,18,19,14,17"><br>
+	z: <input type="text" id="z" value="15,16,17,14,13,14,15,16,15,18,13,10,13,16,15,16,14"><br>
+	<button id="updateBtn">Update</button><span id="volume_span"></span><br>
+	<br>
+	<canvas id="mainCanvas" width="1500px" height="400px" ></canvas>
+</div>
+
+<script>
+(function() {
+
+
+var x = document.querySelector("input[id=x]").value;
+var y = document.querySelector("input[id=y]").value;
+var z = document.querySelector("input[id=z]").value;
+var x_arr = x.split(",");
+var y_arr = y.split(",");
+var z_arr = z.split(",");	
+draw(x_arr, y_arr, z_arr);
+calculate_volume(x_arr, y_arr, z_arr)
+
+var updateBtn = document.querySelector("button[id=updateBtn]");
+read("click");
+function read(evtType) {
+	updateBtn.addEventListener(evtType, myeventlistener);
+}
+function myeventlistener() {
+	window.requestAnimationFrame(function () {
+		var x = document.querySelector("input[id=x]").value;
+		var y = document.querySelector("input[id=y]").value;
+		var z = document.querySelector("input[id=z]").value;
+		var x_arr = x.split(",");
+		var y_arr = y.split(",");
+		var z_arr = z.split(",");
+		if (x_arr.length == y_arr.length && x_arr.length == z_arr.length) {
+			draw(x_arr, y_arr, z_arr);
+			calculate_volume(x_arr, y_arr, z_arr)
+		} else {
+			alert("Please make sure x length == y length == z length");
+		}
+		
+	});
+}
+
+
+function draw(x_arr, y_arr, z_arr) {
+	
+	var renderer = new THREE.WebGLRenderer({
+	    canvas: document.getElementById('mainCanvas')
+	});
+	renderer.setClearColor(0x123456);
+
+	var scene = new THREE.Scene();
+
+	var camera = new THREE.OrthographicCamera(-50, 50, 50, -50, 1, 100);
+	camera.position.set(0, 0, 5);  
+	camera.lookAt(new THREE.Vector3(0, 0, 0));
+	scene.add(camera);
+
+	var material = new THREE.LineBasicMaterial({
+		color: 0xffffff
+	});
+	var geometry = new THREE.Geometry();
+	
+	for (var i = 0; i < x_arr.length; i++) {
+		geometry.vertices.push(
+			new THREE.Vector3( x_arr[i], y_arr[i], 0 )
+		);
+	}
+	
+	geometry.vertices.push(
+		new THREE.Vector3( x_arr[x_arr.length], y_arr[y_arr.length], 0 ),
+		new THREE.Vector3( x_arr[x_arr.length], 0, 0 ),
+		new THREE.Vector3( 0, 0, 0 ),
+		new THREE.Vector3( x_arr[0], 0, 0 )
+	);
+	
+	for (var i = 0; i < x_arr.length; i++) {
+		geometry.vertices.push(
+			new THREE.Vector3( x_arr[i], y_arr[i], z_arr[i] )
+		);
+	}
+	
+	var line = new THREE.Line( geometry, material );
+	scene.add( line );
+
+	var light = new THREE.AmbientLight(0x000000);
+	scene.add(light);
+
+	
+	renderer.render(scene, camera);
+}
+
+function calculate_volume(x_arr, y_arr, z_arr) {
+	var volume = 0;
+	var piece = 1;
+	for (var i = 0; i < x_arr.length; i++) {
+		if (i > 0) {
+			piece = Math.abs(x_arr[i] - x_arr[i-1]);
+		}
+		volume += y_arr[i] * z_arr[i] * piece;
+	}
+	document.querySelector("span[id=volume_span]").innerHTML = " Volume is: " + volume;
+	return volume;
+}
+
+})();
+</script>
+
+</body>
+</html>

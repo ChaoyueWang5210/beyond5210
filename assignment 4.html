@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+</head>
+<body>
+
+
+<div style="width:1100px; height:600px;border: 1px solid black">
+<div>
+		
+		<button id="translate">Translate to: </button> <input type="text" name="" id="translate_val" value="24, 24"> (x, y)
+		<br>
+		<button id="rotate">Rotate to: </button> <input type="text" name="" id="rotate_val" value="24, 240, 240"> (degree, x, y)
+		<br>
+		<button id="scale">Scale to: </button> <input type="text" name="" id="scale_val" value="0.6, 0.6"> (x, y)
+		<br>
+		<button id="shear">Shear to: </button> <input type="text" name="" id="shear_val" value="24, 24"> (x, y)
+	    </div>
+
+<svg height="410" width="400">
+<g id="house">
+   <!--Front View-->
+
+   <polygon points="30,70 10,70 100,10 190,70 170,70 170,190 30,190 30,70" id="outline1"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+   
+
+   <!--Side View(left)-->
+   <rect x="220" y="70" width="120" height="120" id="outline2"style="fill:rgb(255,255,255);stroke:purple;stroke-width:3" /> 
+   <rect x="210" y="10" width="140" height="60" id="outline3" style="fill:rgb(255,255,255);stroke:purple;stroke-width:3" /> 
+
+
+
+   <!--Top View -->
+   <rect x="30" y="210" width="70" height="120" id="outline4"style="fill:rgb(255,255,255);stroke:purple;stroke-width:3" /> 
+   <rect x="100" y="210" width="70" height="120" id="outline5"style="fill:rgb(255,255,255);stroke:purple;stroke-width:3" />
+
+   
+   <!-- Iso -->
+      <!--front portion-->
+   <polygon points="230,285 210,275 290,250 350,335 330,325 330,405 230,370 230,285" id="outline6"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+   
+      <!--side and top portion-->
+      <polygon points="290,250 350,335 395,302 345,220 290,250" id="outline7"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+      <polygon points="350,335 330,325 330,405 380,362 380,314 350,335" id="outline8"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+      <polygon points=" 290,250 210,275 280,238 345,220" id="outline16"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+    
+      
+      
+      
+</g>
+</svg>
+<svg height="410" width="200" >
+<!-- Trimetric -->
+      <!--front portion-->
+   <polygon points="30,285 10,275 90,265 150,335 130,325 130,405 30,370 30,285" id="outline17"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+   
+      <!--side and top portion-->
+      <polygon points="90,265  150,335 195,292 140,220" id="outline18"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+      <polygon points="150,335 130,325 130,405 180,358 180,306" id="outline19"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+      <polygon points="90,265  10,275 72,228 140,220" id="outline20"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+     
+      
+    
+      
+      
+      <!-- 3pt -->
+      <!--front portion-->
+  <polygon points="30,85 10,75 70,65 147,142 145,140 130,215 35,170 " id="outline21"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+   
+      <!--side and top portion-->
+      <polygon points="70,65  147,142 195,105 150,35" id="outline22"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+      <polygon points="147,142 130,125 130,215 180,158 186,111" id="outline23"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+      <polygon points="70,65 10,75 88,48 150,35" id="outline24"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+     
+      
+      
+</svg>
+<svg height="410" width="200" >
+<!-- dimetric-->
+   <!--front portion-->
+   <polygon points="30,290 10,285 80,250 150,335 130,325 130,405 30,370" id="outline25"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+ 
+      <!--side and top portion-->
+      <polygon points="80,250 150,335 195,310 145,235" id="outline26"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+      <polygon points="150,335 130,325 130,405 180,370 180,318 150,335" id="outline27"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+     
+      
+      <!-- 2pt -->
+     <!--front portion-->
+   <polygon points="30,90 10,85 80,50 150,135 130,125 130,205 30,170" id="outline28"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+ 
+      <!--side and top portion-->
+      <polygon points="80,50 150,135 195,110 145,35" id="outline29"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+      <polygon points="150,135 130,125 130,205 180,160 180,118 150,135" id="outline30"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+    
+</svg>
+<svg height="410" width="250">
+
+
+<!-- 1pt-->
+   <!--side and top portion-->
+      <polygon points="100,10 190,70 232,65 185,25" id="outline31"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+      <polygon points="190,70 170,70 170,190 220,152 220,67" id="outline32"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      
+      <!--front portion-->
+
+  
+      <polygon points="30,70 10,70 100,10 190,70 170,70 170,190 30,190" id="outline33"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+   
+   
+   
+      
+<!-- oblique -->
+
+      <polygon points="50,256 30,256 120,196 210,256 190,256 190,376 50,376" id="outline34"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      <polygon points="190,376  190,256 170,270 170,390" id="outline35"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      <polygon points="190,270 210,256 120,196 100,210" id="outline36"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+      <polygon points="30,270 10,270 100,210 190,270 170,270 170,390 30,390" id="outline37"style="fill:rgb(255,255,255); stroke:purple; stroke-width:3" />
+  
+      
+</svg>
+
+
+<form >
+Color Swaps: 
+<input type="radio" name="fillVal" value="purple" checked onchange="changecolors()">purple
+<input type="radio" name="fillVal" value="red" onchange="changecolors()">red
+<input type="radio" name="fillVal" value="green" onchange="changecolors()">green
+<input type="radio" name="fillVal" value="blue" onchange="changecolors()">blue
+<input type="radio" name="fillVal" value="yellow" onchange="changecolors()">yellow
+<input type="radio" name="fillVal" value="orange" onchange="changecolors()">orange
+<br><br>
+Line Thickness:
+<input type="radio" name="strokeVal" value="1" onchange="changeweight()">Thin
+<input type="radio" name="strokeVal" value="3" checked onchange="changeweight()">Normal Thickness
+<input type="radio" name="strokeVal" value="5" onchange="changeweight()">Thick
+<input type="radio" name="strokeVal" value="9" onchange="changeweight()">Very Thick
+</form> 
+</div>
+<script type="text/javascript">
+   var outlineFront = document.getElementById('outline1');
+   var outlineTop01 = document.getElementById('outline4');
+   var outlineTop02 = document.getElementById('outline5');
+   var outlineSide01 = document.getElementById('outline2');
+   var outlineSide02 = document.getElementById('outline3');
+   var outlineIsoTop = document.getElementById('outline7');
+   var outlineIsoTop02 = document.getElementById('outline16');
+   var outlineIsoFront = document.getElementById('outline6');
+   var outlineIsoSide = document.getElementById('outline8');
+   var outlineTrometricFront = document.getElementById('outline17');
+   var outlineTrimetricTop01 = document.getElementById('outline18');
+   var outlineTrimetricSide = document.getElementById('outline19');
+   var outlineTrimetricTop02 = document.getElementById('outline20');
+   var outlineThreePtFront = document.getElementById('outline21');
+   var outlineThreePtTop01 = document.getElementById('outline22');
+   var outlineThreePtSide = document.getElementById('outline23');
+   var outlineThreePtTop02 = document.getElementById('outline24');
+   var outlineDimetricFront = document.getElementById('outline25');
+   var outlineDimetricTop01 = document.getElementById('outline26');
+   var outlineDimetricTop02 = document.getElementById('outline27');
+   var outlineDimetricSide = document.getElementById('outline28');
+   var outlineTwoPtFront = document.getElementById('outline29');
+   var outlineTwoPtTop = document.getElementById('outline30');
+   var outlineTwoPtSide = document.getElementById('outline31');
+   var outlineOnePtFront = document.getElementById('outline32');
+   var outlineOnePtTop = document.getElementById('outline33');
+   var outlineOnePtSide = document.getElementById('outline34');
+   var outlineObliqueBack = document.getElementById('outline35');
+   var outlineObliqueSide = document.getElementById('outline36');
+   var outlineObliqueFront = document.getElementById('outline37');
+   
+   document.getElementById("translate").onclick = function() {
+	value = translate_val.value;
+	transform("translate(" + value + ")");
+}
+document.getElementById("rotate").onclick = function() {
+	value = rotate_val.value.split(",");
+	transform("rotate(" + value[0] + " " + value[1] + " " + value[2] + ")");
+}
+document.getElementById("scale").onclick = function() {
+	value = scale_val.value.split(",");
+	transform("scale(" + value[0] + " " + value[1] + ")");
+}
+document.getElementById("shear").onclick = function() {
+	value = shear_val.value;
+	x = value.split(",")[0];
+	y = value.split(",")[1];
+	transform("skewX(" + x + ") skewY(" + y + ")");
+}
+
+function transform(value){
+         default_attr =""
+		 outlineFront.setAttribute("transform", default_attr + value);
+         outlineTop01.setAttribute("transform", default_attr + value);
+		 outlineTop02.setAttribute("transform", default_attr + value);
+	     outlineSide01.setAttribute("transform", default_attr + value);
+		 outlineSide02.setAttribute("transform", default_attr + value); 
+	     outlineIsoTop.setAttribute("transform", default_attr + value);
+	     outlineIsoTop02.setAttribute("transform", default_attr + value); 
+		 outlineIsoFront.setAttribute("transform", default_attr + value);
+	     outlineIsoSide.setAttribute("transform", default_attr + value);
+	     outlineTrometricFront.setAttribute("transform", default_attr + value);
+		 outlineTrimetricTop01.setAttribute("transform", default_attr + value);
+		 outlineTrimetricSide.setAttribute("transform", default_attr + value);
+		 outlineTrimetricTop02.setAttribute("transform", default_attr + value);
+		 outlineThreePtFront.setAttribute("transform", default_attr + value);
+		 outlineThreePtTop01.setAttribute("transform", default_attr + value);
+		 outlineThreePtSide.setAttribute("transform", default_attr + value);
+		 outlineThreePtTop02.setAttribute("transform", default_attr + value);
+		 outlineDimetricFront.setAttribute("transform", default_attr + value);
+		 outlineDimetricTop01.setAttribute("transform", default_attr + value);
+		 outlineDimetricTop02.setAttribute("transform", default_attr + value);
+		 outlineDimetricSide.setAttribute("transform", default_attr + value);
+		 outlineTwoPtFront.setAttribute("transform", default_attr + value);
+		 outlineTwoPtTop.setAttribute("transform", default_attr + value);
+		 outlineTwoPtSide.setAttribute("transform", default_attr + value);
+		 outlineOnePtFront.setAttribute("transform", default_attr + value);
+		 outlineOnePtTop.setAttribute("transform", default_attr + value);
+		 outlineOnePtSide.setAttribute("transform", default_attr + value);
+		 outlineObliqueBack.setAttribute("transform", default_attr + value);
+		 outlineObliqueSide.setAttribute("transform", default_attr + value);
+		 outlineObliqueFront.setAttribute("transform", default_attr + value);
+   
+}
+
+   var radioColors = document.getElementsByName('fillVal');
+   var radioStroke = document.getElementsByName('strokeVal');
+   var filler = "white";
+   var changecolors = function(){
+      filler = "white";
+      for (var i = 0, length = radioColors.length; i < length; i++) {
+         if (radioColors[i].checked) {
+
+            outlineFront.style.stroke = radioColors[i].value;
+            outlineTop01.style.stroke = radioColors[i].value;
+            outlineTop02.style.stroke = radioColors[i].value;
+            outlineSide01.style.stroke = radioColors[i].value;
+            outlineSide02.style.stroke = radioColors[i].value;
+            outlineIsoTop.style.stroke =  radioColors[i].value;
+            outlineIsoSide.style.stroke = radioColors[i].value;
+            outlineIsoFront.style.stroke = radioColors[i].value;
+            outlineIsoTop02.style.stroke =  radioColors[i].value;
+            outlineTrometricFront.style.stroke =  radioColors[i].value;
+            outlineTrimetricTop01.style.stroke =  radioColors[i].value;
+            outlineTrimetricSide.style.stroke =  radioColors[i].value;
+            outlineTrimetricTop02.style.stroke =  radioColors[i].value;
+            outlineThreePtFront.style.stroke =  radioColors[i].value;
+            outlineThreePtTop01.style.stroke =  radioColors[i].value;
+            outlineThreePtSide.style.stroke =  radioColors[i].value;
+            outlineThreePtTop02.style.stroke =  radioColors[i].value;
+            outlineDimetricFront.style.stroke =  radioColors[i].value;
+            outlineDimetricTop01.style.stroke =  radioColors[i].value;
+            outlineDimetricTop02.style.stroke =  radioColors[i].value;
+            outlineDimetricSide.style.stroke =  radioColors[i].value;
+            outlineTwoPtFront.style.stroke =  radioColors[i].value;
+            outlineTwoPtTop.style.stroke =  radioColors[i].value;
+            outlineTwoPtSide.style.stroke =  radioColors[i].value;
+            outlineOnePtFront.style.stroke =  radioColors[i].value;
+            outlineOnePtTop.style.stroke =  radioColors[i].value;
+            outlineOnePtSide.style.stroke =  radioColors[i].value;
+            outlineObliqueBack.style.stroke =  radioColors[i].value;
+            outlineObliqueSide.style.stroke =  radioColors[i].value;
+            outlineObliqueFront.style.stroke =  radioColors[i].value;
+            
+            if(radioColors[i].value === "red"){
+               filler = "green";
+            } 
+            if(radioColors[i].value === "blue"){
+               filler = "orange";
+            } 
+            if(radioColors[i].value === "green"){
+               filler = "red";
+            } 
+            if(radioColors[i].value === "orange"){
+               filler = "blue";
+            } 
+            if(radioColors[i].value === "yellow"){
+               filler = "purple";
+            } 
+
+            outlineTop01.style.fill = filler;
+            outlineTop02.style.fill = filler;
+            outlineSide02.style.fill = filler;  
+            outlineIsoTop.style.fill = filler; 
+            outlineIsoTop02.style.fill = filler; 
+            outlineTwoPtSide.style.fill = filler; 
+            outlineTwoPtFront.style.fill = filler; 
+            outlineThreePtTop01.style.fill = filler; 
+            outlineThreePtTop02.style.fill = filler; 
+            outlineDimetricTop01.style.fill = filler;  
+            outlineObliqueSide.style.fill = filler; 
+            outlineTrimetricTop01.style.fill = filler; 
+            outlineTrimetricTop02.style.fill = filler; 
+        
+         break;
+         }
+      }
+   };
+   
+   var changeweight = function(){
+      for (var i = 0, length = radioStroke.length; i < length; i++) {
+         if (radioStroke[i].checked) {
+            outlineFront.style['stroke-width']= radioStroke[i].value;
+            outlineTop01.style['stroke-width']= radioStroke[i].value;
+            outlineTop02.style['stroke-width']= radioStroke[i].value;
+            outlineSide01.style['stroke-width']= radioStroke[i].value;
+            outlineSide02.style['stroke-width']= radioStroke[i].value;
+            outlineIsoTop.style['stroke-width']= radioStroke[i].value;
+            outlineIsoTop02.style['stroke-width']= radioStroke[i].value;
+            outlineIsoFront.style['stroke-width']= radioStroke[i].value;
+            outlineIsoSide.style['stroke-width']= radioStroke[i].value;
+            outlineTrometricFront.style['stroke-width']= radioStroke[i].value;
+            outlineTrimetricTop01.style['stroke-width']= radioStroke[i].value;
+            outlineTrimetricSide.style['stroke-width']= radioStroke[i].value;
+            outlineTrimetricTop02.style['stroke-width']= radioStroke[i].value;
+            outlineThreePtFront.style['stroke-width']= radioStroke[i].value;
+            outlineThreePtTop01.style['stroke-width']= radioStroke[i].value;
+            outlineThreePtSide.style['stroke-width']= radioStroke[i].value;
+            outlineThreePtTop02.style['stroke-width']= radioStroke[i].value;
+            outlineDimetricFront.style['stroke-width']= radioStroke[i].value;
+            outlineDimetricTop01.style['stroke-width']= radioStroke[i].value;
+            outlineDimetricTop02.style['stroke-width']= radioStroke[i].value;
+            outlineDimetricSide.style['stroke-width']= radioStroke[i].value;
+            outlineTwoPtFront.style['stroke-width']= radioStroke[i].value;
+            outlineTwoPtTop.style['stroke-width']= radioStroke[i].value;
+            outlineTwoPtSide.style['stroke-width']= radioStroke[i].value;
+            outlineOnePtFront.style['stroke-width']= radioStroke[i].value;
+            outlineOnePtTop.style['stroke-width']= radioStroke[i].value;
+            outlineOnePtSide.style['stroke-width']= radioStroke[i].value;
+            outlineObliqueBack.style['stroke-width']= radioStroke[i].value;
+            outlineObliqueSide.style['stroke-width']= radioStroke[i].value;
+            outlineObliqueFront.style['stroke-width']= radioStroke[i].value;
+            
+         
+         
+          break;
+         }
+         
+      }
+         
+   };
+   
+   
+</script>
+</body>
+</html>

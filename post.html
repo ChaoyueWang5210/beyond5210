@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="section">
+	    	<div class="container">
+				<div class="row">
+					<!-- Blog Post -->
+					<div class="col-sm-8">
+						<div class="blog-post blog-single-post">
+							<div class="single-post-title">
+								<h3>{{blog.title}}</h3>
+							</div>
+							<div class="single-post-info">
+								<i class="glyphicon glyphicon-time"></i>{{blog.ts}}
+							</div>
+
+							<div class="single-post-content">
+								{{blog.text}}
+
+
+							</div>
+							<!-- Comments -->
+                            <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//blog-2bvn7qtyya.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+							<!-- End Comments -->
+						</div>
+					</div>
+					<!-- End Blog Post -->
+					<!-- Sidebar -->
+					<div class="col-sm-4 blog-sidebar">
+
+						<h4>Recent Posts</h4>
+						<ul class="recent-posts">
+                            {% for a in titles %}
+                            <li><a href="/blog/{{a.id}}">{{a.title}}</a></li>
+                            {% endfor %}
+
+						</ul>
+
+					</div>
+					<!-- End Sidebar -->
+				</div>
+			</div>
+	    </div>
+{% endblock %}

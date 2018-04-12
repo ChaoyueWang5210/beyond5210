@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Question 1</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 16px;
+				background-color: #ffffff;
+				margin: 0px;
+				overflow: hidden;
+				margin: 10px;
+			}
+			.container {
+				color: black;
+				font-size: 1.2em;
+			}
+		</style>
+	</head>
+	<body ontouchstart="">
+
+	<div class="container">
+		xStart: <span id="xStart_span">0</span><input type="range" id="xStart" value="0" min="0" max="666"><br>
+		yStart: <span id="yStart_span">0</span><input type="range" id="yStart" value="0" min="0" max="666"><br>
+		xEnd: <span id="xEnd_span">80</span><input type="range" id="xEnd" value="80" min="0" max="666"><br>
+		yEnd: <span id="yEnd_span">80</span><input type="range" id="yEnd" value="80" min="0" max="666"><br>
+		depthRatio: <span id="depthRatio_span">100</span><input type="range" id="depthRatio" value="100" min="0" max="666"><br>
+		v: <span id="v_span">1</span><input type="range" id="v" value="1" min="0" max="1" step="0.1"><br>
+		h: <span id="h_span">1</span><input type="range" id="h" value="1" min="0" max="1" step="0.1"><br>
+		<button id="updateBtn">Update</button>
+	</div>
+
+<script src="js/three.min.js"></script>
+		
+<script>
+(function() {
+
+	draw(100, 100, 0, 0, 1, 1, 100);
+
+	var xStart = document.querySelector("input[id=xStart]");
+	var yStart = document.querySelector("input[id=yStart]");
+	var xEnd = document.querySelector("input[id=xEnd]");
+	var yEnd = document.querySelector("input[id=yEnd]");
+	var v = document.querySelector("input[id=v]");
+	var h = document.querySelector("input[id=h]");
+	var fb = document.querySelector("input[id=fb]");
+	var depthRatio = document.querySelector("input[id=depthRatio]");
+
+	var updateBtn = document.querySelector("button[id=updateBtn]");
+
+	read("click");
+	function read(evtType) {
+		updateBtn.addEventListener(evtType, myeventlistener);
+	}
+	function myeventlistener() {
+		window.requestAnimationFrame(function () {
+			var canvas = document.querySelector("canvas");
+			canvas.parentNode.removeChild(canvas);
+			draw(xStart.value, yStart.value, xEnd.value, yEnd.value, v.value, h.value, depthRatio.value, fb.value);
+		});
+	}
+
+	readrange("mousemove")
+	readrange("mousedown")
+	function readrange(evtType) {
+		v.addEventListener(evtType, update_span_eventlistener);
+		h.addEventListener(evtType, update_span_eventlistener);
+		fb.addEventListener(evtType, update_span_eventlistener);
+		depthRatio.addEventListener(evtType, update_span_eventlistener);
+	}
+	function update_span_eventlistener() {
+		window.requestAnimationFrame(function () {
+			document.querySelector("span[id=v_span]").innerHTML = v.value;
+			document.querySelector("span[id=h_span]").innerHTML = h.value;
+			document.querySelector("span[id=fb_span]").innerHTML = fb.value;
+			document.querySelector("span[id=depthRatio_span]").innerHTML = depthRatio.value;
+		});
+	}
+})();
+
+function draw(xStart, yStart, xEnd, yEnd, v, h, depthRatio, fb=0.5) {
+	var box_width = Math.abs(xStart - xEnd); 
+	var box_height = Math.abs(yStart - yEnd); 
+	var box_depth = depthRatio;
+
+	var tmp_r;
+
+	var ball_shang = 50 * v;
+	var ball_xia = 50 * v;
+	if (box_width > box_depth) {
+		tmp_r = box_depth;
+		
+	} else {
+		tmp_r = box_width
+	}
+	ball_shang = tmp_r/2 * v;
+	ball_xia = tmp_r/2 * v;
+
+
+	var ball_zuo = 50 * h;
+	var ball_you = 50 * h;
+	if (box_height > box_depth) {
+		tmp_r = box_depth;
+		
+	} else {
+		tmp_r = box_height
+	}
+	ball_zuo = tmp_r/2 * v;
+	ball_you = tmp_r/2 * v;
+
+
+	var ball_qian = 50 * fb;
+	var ball_hou = 50 * fb;
+	if (box_width > box_height) {
+		tmp_r = box_height;
+		
+	} else {
+		tmp_r = box_width
+	}
+	ball_qian = tmp_r/2 * v;
+	ball_hou = tmp_r/2 * v;
+
+	var text = {
+		"metadata": {
+			"type": "App"
+		},
+		"project": {
+			"gammaInput": false,
+			"gammaOutput": false,
+			"shadows": true,
+			"vr": false
+		},
+		"camera": {
+			"metadata": {
+				"version": 4.5,
+				"type": "Object",
+				"generator": "Object3D.toJSON"
+			},
+			"object": {
+				"uuid": "7D478897-4D31-4D1F-A995-9CD7F529C56F",
+				"type": "PerspectiveCamera",
+				"name": "Camera",
+				"matrix": [-0.198842,0,0.980032,0,0.496111,0.862405,0.100658,0,-0.845184,0.506219,-0.171482,0,-563.601758,337.566954,-114.351104,1],
+				"fov": 50,
+				"zoom": 1,
+				"near": 0.1,
+				"far": 100000,
+				"focus": 10,
+				"aspect": 1.388563,
+				"filmGauge": 35,
+				"filmOffset": 0
+			}
+		},
+		"scene": {
+			"metadata": {
+				"version": 4.5,
+				"type": "Object",
+				"generator": "Object3D.toJSON"
+			},
+			"geometries": [
+				{
+					"uuid": "D8E200D3-27BC-49F8-A5C5-7384206E70FE",
+					"type": "BoxGeometry",
+					"width": box_depth,
+					"height": box_height,
+					"depth": box_width,
+					"widthSegments": 1,
+					"heightSegments": 1,
+					"depthSegments": 1
+				},
+				{
+					"uuid": "A27D781B-A53E-4371-A546-1FC0D5809E7F",
+					"type": "IcosahedronGeometry",
+					"radius": ball_hou, // hou
+					"detail": 2
+				},
+				{
+					"uuid": "14A3CE56-A795-43A3-8F1B-6298499AB61F",
+					"type": "IcosahedronGeometry",
+					"radius": ball_you, // you
+					"detail": 2
+				},
+				{
+					"uuid": "B76354DD-3B5D-4798-8009-04ED4657328C",
+					"type": "IcosahedronGeometry",
+					"radius": ball_qian, // qian
+					"detail": 2
+				},
+				{
+					"uuid": "882756EA-EA47-4843-9085-0323D84F7D1A",
+					"type": "IcosahedronGeometry",
+					"radius": ball_shang, // shang
+					"detail": 2
+				},
+				{
+					"uuid": "3A0A12BD-7733-4D43-B624-9F43EB3C5E17",
+					"type": "IcosahedronGeometry",
+					"radius": ball_zuo, // zuo
+					"detail": 2
+				},
+				{
+					"uuid": "A6936AE0-E591-4F8A-9E6B-C13CAC2F172F",
+					"type": "IcosahedronGeometry",
+					"radius": ball_xia, // xia
+					"detail": 2
+				}],
+			"materials": [
+				{
+					"uuid": "3FD65464-52D9-4F66-BB1F-D68E3DCF811C",
+					"type": "MeshStandardMaterial",
+					"color": 33023,
+					"roughness": 0.5,
+					"metalness": 0.5,
+					"emissive": 0,
+					"depthFunc": 3,
+					"depthTest": true,
+					"depthWrite": true,
+					"skinning": false,
+					"morphTargets": false,
+					"dithering": false
+				},
+				{
+					"uuid": "983DEDE1-FFB9-4F22-90BA-D525815DAFF8",
+					"type": "MeshStandardMaterial",
+					"color": 54321,
+					"roughness": 0.5,
+					"metalness": 0.5,
+					"emissive": 0,
+					"depthFunc": 3,
+					"depthTest": true,
+					"depthWrite": true,
+					"skinning": false,
+					"morphTargets": false,
+					"dithering": false
+				},
+				{
+					"uuid": "462039F0-CEAD-4494-ADC9-A9FE9C0E5F24",
+					"type": "MeshStandardMaterial",
+					"color": 54321,
+					"roughness": 0.5,
+					"metalness": 0.5,
+					"emissive": 0,
+					"depthFunc": 3,
+					"depthTest": true,
+					"depthWrite": true,
+					"skinning": false,
+					"morphTargets": false,
+					"dithering": false
+				},
+				{
+					"uuid": "3D783B19-149E-4437-A890-C9CF6C4CED3E",
+					"type": "MeshStandardMaterial",
+					"color": 54321,
+					"roughness": 0.5,
+					"metalness": 0.5,
+					"emissive": 0,
+					"depthFunc": 3,
+					"depthTest": true,
+					"depthWrite": true,
+					"skinning": false,
+					"morphTargets": false,
+					"dithering": false
+				},
+				{
+					"uuid": "2F3F1EEE-89DE-47F8-B2AE-42CBAFD4EAEE",
+					"type": "MeshStandardMaterial",
+					"color": 54321,
+					"roughness": 0.5,
+					"metalness": 0.5,
+					"emissive": 0,
+					"depthFunc": 3,
+					"depthTest": true,
+					"depthWrite": true,
+					"skinning": false,
+					"morphTargets": false,
+					"dithering": false
+				},
+				{
+					"uuid": "F516BC0E-919B-41CB-BD91-A92C6BEF3448",
+					"type": "MeshStandardMaterial",
+					"color": 54321,
+					"roughness": 0.5,
+					"metalness": 0.5,
+					"emissive": 0,
+					"depthFunc": 3,
+					"depthTest": true,
+					"depthWrite": true,
+					"skinning": false,
+					"morphTargets": false,
+					"dithering": false
+				},
+				{
+					"uuid": "7081432E-3F35-4625-A1AF-D9065C829C51",
+					"type": "MeshStandardMaterial",
+					"color": 54321,
+					"roughness": 0.5,
+					"metalness": 0.5,
+					"emissive": 0,
+					"depthFunc": 3,
+					"depthTest": true,
+					"depthWrite": true,
+					"skinning": false,
+					"morphTargets": false,
+					"dithering": false
+				}],
+			"object": {
+				"uuid": "3741222A-BD8F-401C-A5D2-5A907E891896",
+				"type": "Scene",
+				"name": "Scene",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"children": [
+					{
+						"uuid": "26DAAD69-725D-43B7-AF9D-990A99DEF8C5",
+						"type": "Mesh",
+						"name": "Box",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"geometry": "D8E200D3-27BC-49F8-A5C5-7384206E70FE",
+						"material": "3FD65464-52D9-4F66-BB1F-D68E3DCF811C"
+					},
+					{
+						"uuid": "B855E267-A266-4098-ACD6-6A1FDE7B88BA",
+						"type": "Mesh",
+						"name": "Icosahedron",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,box_depth/2,0,0,1],
+						"geometry": "A27D781B-A53E-4371-A546-1FC0D5809E7F",
+						"material": "983DEDE1-FFB9-4F22-90BA-D525815DAFF8"
+					},
+					{
+						"uuid": "92E61C7D-3A04-443D-867B-A4CBA0D8A795",
+						"type": "Mesh",
+						"name": "Icosahedron 2",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,(box_width/2),1],
+						"geometry": "14A3CE56-A795-43A3-8F1B-6298499AB61F",
+						"material": "462039F0-CEAD-4494-ADC9-A9FE9C0E5F24"
+					},
+					{
+						"uuid": "99F8859C-4905-4A24-AFB4-60A57E57676A",
+						"type": "Mesh",
+						"name": "Icosahedron 1",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-(box_depth/2),0,0,1],
+						"geometry": "B76354DD-3B5D-4798-8009-04ED4657328C",
+						"material": "3D783B19-149E-4437-A890-C9CF6C4CED3E"
+					},
+					{
+						"uuid": "5191054A-A431-4937-B27E-83093FADF56B",
+						"type": "PointLight",
+						"name": "PointLight 2",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-136.744058,-130.043889,-139.870795,1],
+						"color": 16777215,
+						"intensity": 1,
+						"distance": 0,
+						"decay": 1,
+						"shadow": {
+							"camera": {
+								"uuid": "5E0CB44B-292A-402E-A4FF-B0A4D0EE8F29",
+								"type": "PerspectiveCamera",
+								"fov": 90,
+								"zoom": 1,
+								"near": 0.5,
+								"far": 500,
+								"focus": 10,
+								"aspect": 1,
+								"filmGauge": 35,
+								"filmOffset": 0
+							}
+						}
+					},
+					{
+						"uuid": "87BB993E-03EE-4C5A-8181-56CB02F9D98D",
+						"type": "AmbientLight",
+						"name": "AmbientLight 5",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,77.941201,72.928127,71.665792,1],
+						"color": 16777215,
+						"intensity": 1
+					},
+					{
+						"uuid": "A5DD8578-A095-4989-93DC-E82251072F73",
+						"type": "Mesh",
+						"name": "Icosahedron 2",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,box_height/2,0,1],
+						"geometry": "882756EA-EA47-4843-9085-0323D84F7D1A",
+						"material": "2F3F1EEE-89DE-47F8-B2AE-42CBAFD4EAEE"
+					},
+					{
+						"uuid": "7268B30A-230C-42D5-A25D-C8E9BF489300",
+						"type": "Mesh",
+						"name": "Icosahedron 3",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,-(box_width/2),1],
+						"geometry": "3A0A12BD-7733-4D43-B624-9F43EB3C5E17",
+						"material": "F516BC0E-919B-41CB-BD91-A92C6BEF3448"
+					},
+					{
+						"uuid": "8B877246-6576-4EC1-B4E2-2223A7EB634C",
+						"type": "Mesh",
+						"name": "Icosahedron 4",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,-(box_height/2),0,1],
+						"geometry": "A6936AE0-E591-4F8A-9E6B-C13CAC2F172F",
+						"material": "7081432E-3F35-4625-A1AF-D9065C829C51"
+					}],
+				"background": 0
+			}
+		},
+		"scripts": {
+		}
+	};
+
+	var APP = {
+
+		Player: function () {
+
+			var loader = new THREE.ObjectLoader();
+			var camera, scene, renderer;
+
+			var controls, effect, cameraVR, isVR;
+
+			var events = {};
+
+			this.dom = document.createElement( 'div' );
+
+			this.width = 500;
+			this.height = 500;
+
+			this.load = function ( json ) {
+
+				isVR = json.project.vr;
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setClearColor( 0x000000 );
+				renderer.setPixelRatio( window.devicePixelRatio );
+
+				if ( json.project.gammaInput ) renderer.gammaInput = true;
+				if ( json.project.gammaOutput ) renderer.gammaOutput = true;
+
+				if ( json.project.shadows ) {
+
+					renderer.shadowMap.enabled = true;
+					// renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+				}
+
+				this.dom.appendChild( renderer.domElement );
+
+				this.setScene( loader.parse( json.scene ) );
+				this.setCamera( loader.parse( json.camera ) );
+
+				events = {
+					init: [],
+					start: [],
+					stop: [],
+					keydown: [],
+					keyup: [],
+					mousedown: [],
+					mouseup: [],
+					mousemove: [],
+					touchstart: [],
+					touchend: [],
+					touchmove: [],
+					update: []
+				};
+
+				var scriptWrapParams = 'player,renderer,scene,camera';
+				var scriptWrapResultObj = {};
+
+				for ( var eventKey in events ) {
+
+					scriptWrapParams += ',' + eventKey;
+					scriptWrapResultObj[ eventKey ] = eventKey;
+
+				}
+
+				var scriptWrapResult = JSON.stringify( scriptWrapResultObj ).replace( /\"/g, '' );
+
+				for ( var uuid in json.scripts ) {
+
+					var object = scene.getObjectByProperty( 'uuid', uuid, true );
+
+					if ( object === undefined ) {
+
+						console.warn( 'APP.Player: Script without object.', uuid );
+						continue;
+
+					}
+
+					var scripts = json.scripts[ uuid ];
+
+					for ( var i = 0; i < scripts.length; i ++ ) {
+
+						var script = scripts[ i ];
+
+						var functions = ( new Function( scriptWrapParams, script.source + '\nreturn ' + scriptWrapResult + ';' ).bind( object ) )( this, renderer, scene, camera );
+
+						for ( var name in functions ) {
+
+							if ( functions[ name ] === undefined ) continue;
+
+							if ( events[ name ] === undefined ) {
+
+								console.warn( 'APP.Player: Event type not supported (', name, ')' );
+								continue;
+
+							}
+
+							events[ name ].push( functions[ name ].bind( object ) );
+
+						}
+
+					}
+
+				}
+
+				dispatch( events.init, arguments );
+
+			};
+
+			this.setCamera = function ( value ) {
+
+				camera = value;
+				camera.aspect = this.width / this.height;
+				camera.updateProjectionMatrix();
+
+				if ( isVR === true ) {
+
+					cameraVR = new THREE.PerspectiveCamera();
+					cameraVR.projectionMatrix = camera.projectionMatrix;
+					camera.add( cameraVR );
+
+					controls = new THREE.VRControls( cameraVR );
+					effect = new THREE.VREffect( renderer );
+
+					if ( WEBVR.isAvailable() === true ) {
+
+						this.dom.appendChild( WEBVR.getButton( effect ) );
+
+					}
+
+					if ( WEBVR.isLatestAvailable() === false ) {
+
+						this.dom.appendChild( WEBVR.getMessage() );
+
+					}
+
+				}
+
+			};
+
+			this.setScene = function ( value ) {
+
+				scene = value;
+
+			};
+
+			this.setSize = function ( width, height ) {
+
+				this.width = width;
+				this.height = height;
+
+				if ( camera ) {
+
+					camera.aspect = this.width / this.height;
+					camera.updateProjectionMatrix();
+
+				}
+
+				if ( renderer ) {
+
+					renderer.setSize( width, height );
+
+				}
+
+			};
+
+			function dispatch( array, event ) {
+
+				for ( var i = 0, l = array.length; i < l; i ++ ) {
+
+					array[ i ]( event );
+
+				}
+
+			}
+
+			var prevTime, request;
+
+			function animate( time ) {
+
+				request = requestAnimationFrame( animate );
+
+				try {
+
+					dispatch( events.update, { time: time, delta: time - prevTime } );
+
+				} catch ( e ) {
+
+					console.error( ( e.message || e ), ( e.stack || "" ) );
+
+				}
+
+				if ( isVR === true ) {
+
+					camera.updateMatrixWorld();
+
+					controls.update();
+					effect.render( scene, cameraVR );
+
+				} else {
+
+					renderer.render( scene, camera );
+
+				}
+
+				prevTime = time;
+
+			}
+
+			this.play = function () {
+
+				document.addEventListener( 'keydown', onDocumentKeyDown );
+				document.addEventListener( 'keyup', onDocumentKeyUp );
+				document.addEventListener( 'mousedown', onDocumentMouseDown );
+				document.addEventListener( 'mouseup', onDocumentMouseUp );
+				document.addEventListener( 'mousemove', onDocumentMouseMove );
+				document.addEventListener( 'touchstart', onDocumentTouchStart );
+				document.addEventListener( 'touchend', onDocumentTouchEnd );
+				document.addEventListener( 'touchmove', onDocumentTouchMove );
+
+				dispatch( events.start, arguments );
+
+				request = requestAnimationFrame( animate );
+				prevTime = performance.now();
+
+			};
+
+			this.stop = function () {
+
+				document.removeEventListener( 'keydown', onDocumentKeyDown );
+				document.removeEventListener( 'keyup', onDocumentKeyUp );
+				document.removeEventListener( 'mousedown', onDocumentMouseDown );
+				document.removeEventListener( 'mouseup', onDocumentMouseUp );
+				document.removeEventListener( 'mousemove', onDocumentMouseMove );
+				document.removeEventListener( 'touchstart', onDocumentTouchStart );
+				document.removeEventListener( 'touchend', onDocumentTouchEnd );
+				document.removeEventListener( 'touchmove', onDocumentTouchMove );
+
+				dispatch( events.stop, arguments );
+
+				cancelAnimationFrame( request );
+
+			};
+
+			this.dispose = function () {
+
+				while ( this.dom.children.length ) {
+
+					this.dom.removeChild( this.dom.firstChild );
+
+				}
+
+				renderer.dispose();
+
+				camera = undefined;
+				scene = undefined;
+				renderer = undefined;
+
+			};
+
+			//
+
+			function onDocumentKeyDown( event ) {
+
+				dispatch( events.keydown, event );
+
+			}
+
+			function onDocumentKeyUp( event ) {
+
+				dispatch( events.keyup, event );
+
+			}
+
+			function onDocumentMouseDown( event ) {
+
+				dispatch( events.mousedown, event );
+
+			}
+
+			function onDocumentMouseUp( event ) {
+
+				dispatch( events.mouseup, event );
+
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				dispatch( events.mousemove, event );
+
+			}
+
+			function onDocumentTouchStart( event ) {
+
+				dispatch( events.touchstart, event );
+
+			}
+
+			function onDocumentTouchEnd( event ) {
+
+				dispatch( events.touchend, event );
+
+			}
+
+			function onDocumentTouchMove( event ) {
+
+				dispatch( events.touchmove, event );
+
+			}
+
+		}
+
+	};
+
+	var player = new APP.Player();
+	player.load( text );
+	player.setSize( window.innerWidth, window.innerHeight );
+	player.play();
+
+	document.body.appendChild( player.dom );
+
+	window.addEventListener( 'resize', function () {
+		player.setSize( window.innerWidth/1.5, window.innerHeight/1.5 );
+	} );
+}
+</script>
+	</body>
+</html>

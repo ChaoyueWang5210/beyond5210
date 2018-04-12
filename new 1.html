@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<div class="container">
+	<svg id="mysvg" height="600" width="1000">
+		<!-- Draw front -->
+		<!-- Frame -->
+	    <polyline id="l1" points="20 100,200 20,380 100" style="fill:lightblue;stroke:black;stroke-width:3" />
+	    <polyline id="l2" points="40 94,40 250,360 250, 360 94" style="fill:lightblue;stroke:black;stroke-width:3" />
+	    <polyline id="l3" points="250 40,250 10,330 10, 330 76" style="fill:lightblue;stroke:black;stroke-width:3" />
+	    <!-- Eyes -->
+	    <rect id = "rect1" x="120" y="100" height="60" width="40" style="fill:white;stroke:black;stroke-width:3" />
+	    <rect id = "rect2" x="240" y="100" height="60" width="40" style="fill:white;stroke:black;stroke-width:3" />
+	    <circle id = "c1" cx="140" cy="130" r="15" style="fill:black;stroke:black;stroke-width:3" />
+	    <circle id = "c2" cx="260" cy="130" r="15" style="fill:black;stroke:black;stroke-width:3" />
+	    <!-- Mouth -->
+	    <path id="p1" d="M 140 180 q 60 110 120 0" stroke="black" stroke-width="3" fill="none" />
+	    <path id="p2" d="M 140 180 q 60 60 120 0" stroke="black" stroke-width="3" fill="none" />
+	    <!-- Tooth -->
+	    <polyline id="l4" points="180 207, 180 220, 190 220, 190 210" style="fill:white;stroke:black;stroke-width:3" />
+	    <polyline id="l5" points="195 210, 195 220, 205 220, 205 210" style="fill:white;stroke:black;stroke-width:3" />
+	    <polyline id="l6" points="210 210, 210 220, 220 220, 220 207" style="fill:white;stroke:black;stroke-width:3" />
+	    <polyline id="l7" points="187 231, 187 225, 197 225, 197 234" style="fill:white;stroke:black;stroke-width:3" />
+	    <polyline id="l8" points="203 234, 203 225, 213 225, 213 231" style="fill:white;stroke:black;stroke-width:3" />
+	    
+	    <!-- Deaw top -->
+	    <rect id="rect8" x="20", y="300" height="250" width="360" style="fill:lightblue;stroke:black;stroke-width:3" />
+	    <line id="l9" x1="200" y1="300" x2="200" y2="550" style="stroke:black;stroke-width:3" />
+	    <rect id="rect9" x = "250" y="362" height="125" width="80" style="fill:grey;stroke:black;stroke-width:3" />
+
+	    <!-- Draw side -->
+	    <rect id="rect3" x="663" y="10" height="10" width="125" style="fill:lightblue;stroke:black;stroke-width:3" />
+	    <rect id="rect4" x="600" y="20" height="80" width="250" style="fill:lightblue;stroke:black;stroke-width:3" />
+	    <rect id="rect5" x="620" y="100" height="150" width="210" style="fill:lightblue;stroke:black;stroke-width:3" />
+	    <rect id="rect6" x="680" y="110" height="60" width="40" style="fill:white;stroke:black;stroke-width:3" />
+	    <rect id="rect7" x="730" y="110" height="60" width="40" style="fill:white;stroke:black;stroke-width:3" />
+	</svg>
+	<div>
+		<!-- <button id="line_red">Change line color to red</button> 
+		<button id="line_blue">Change line color to blue</button> 
+		<button id="filling_green">Change filling color to green</button>
+		<button id="filling_pink">Change filling color to pink</button>
+		<br><br> -->
+		<button id="translate">Translate to: </button> <input type="text" name="" id="translate_val" value="20, 20"> (x, y)
+		<br>
+		<button id="rotate">Rotate to: </button> <input type="text" name="" id="rotate_val" value="10, 130, 180"> (degree, x, y)
+		<br>
+		<button id="scale">Scale to: </button> <input type="text" name="" id="scale_val" value="0.8, 0.9"> (x, y)
+		<br>
+		<button id="shear">Shear to: </button> <input type="text" name="" id="shear_val" value="20, 5"> (x, y)
+	</div>
+</div>
+
+<script type="text/javascript">
+// ---------- buttons ----------//
+// document.getElementById("line_red").onclick = function() {
+// 	change_line_color("red");
+// }
+// document.getElementById("line_blue").onclick = function() {
+// 	change_line_color("blue");
+// }
+// document.getElementById("filling_green").onclick = function() {
+// 	change_filling_color("green");
+// }
+// document.getElementById("filling_pink").onclick = function() {
+// 	change_filling_color("pink");
+// }
+document.getElementById("translate").onclick = function() {
+	value = translate_val.value;
+	transform("translate(" + value + ")");
+}
+document.getElementById("rotate").onclick = function() {
+	value = rotate_val.value.split(",");
+	transform("rotate(" + value[0] + " " + value[1] + " " + value[2] + ")");
+}
+document.getElementById("scale").onclick = function() {
+	value = scale_val.value.split(",");
+	transform("scale(" + value[0] + " " + value[1] + ")");
+}
+document.getElementById("shear").onclick = function() {
+	value = shear_val.value;
+	x = value.split(",")[0];
+	y = value.split(",")[1];
+	transform("skewX(" + x + ") skewY(" + y + ")");
+}
+//-- functions --//
+// function change_line_color(color) {
+// 	l1.style.stroke = color;
+//     l2.style.stroke = color;
+//     l3.style.stroke = color;
+//     l4.style.stroke = color;
+//     l5.style.stroke = color;
+//     l6.style.stroke = color;
+//     l7.style.stroke = color;
+//     l8.style.stroke = color;
+//     l9.style.stroke = color;
+//     rect1.style.stroke = color;
+//     rect2.style.stroke = color;
+//     rect3.style.stroke = color;
+//     rect4.style.stroke = color;
+//     rect5.style.stroke = color;
+//     rect6.style.stroke = color;
+//     rect7.style.stroke = color;
+//     rect8.style.stroke = color;
+//     rect9.style.stroke = color;
+//     p1.style.stroke = color;
+//     p2.style.stroke = color;
+// }
+// function change_filling_color(color) {
+//     l1.style.fill = color;
+//     l2.style.fill = color;
+//     l3.style.fill = color;
+//     // l4.style.fill = color;
+//     // l5.style.fill = color;
+//     // l6.style.fill = color;
+//     // l7.style.fill = color;
+//     // l8.style.fill = color;
+//     // rect1.style.fill = color;
+//     // rect2.style.fill = color;
+//     rect3.style.fill = color;
+//     rect4.style.fill = color;
+//     rect5.style.fill = color;
+//     // rect6.style.fill = color;
+//     // rect7.style.fill = color;
+//     rect8.style.fill = color;
+//     // rect9.style.fill = color;
+//     p1.style.fill = color;
+//     p2.style.fill = color;
+// }
+function transform(value) {
+	default_attr = ""
+	l1.setAttribute("transform", default_attr + value);
+    l2.setAttribute("transform", default_attr + value);
+    l3.setAttribute("transform", default_attr + value);
+    l4.setAttribute("transform", default_attr + value);
+    l5.setAttribute("transform", default_attr + value);
+    l6.setAttribute("transform", default_attr + value);
+    l7.setAttribute("transform", default_attr + value);
+    l8.setAttribute("transform", default_attr + value);
+    l9.setAttribute("transform", default_attr + value);
+    c1.setAttribute("transform", default_attr + value);
+    c2.setAttribute("transform", default_attr + value);
+    rect1.setAttribute("transform", default_attr + value);
+    rect2.setAttribute("transform", default_attr + value);
+    rect3.setAttribute("transform", default_attr + value);
+    rect4.setAttribute("transform", default_attr + value);
+    rect5.setAttribute("transform", default_attr + value);
+    rect6.setAttribute("transform", default_attr + value);
+    rect7.setAttribute("transform", default_attr + value);
+    rect8.setAttribute("transform", default_attr + value);
+    rect9.setAttribute("transform", default_attr + value);
+    p1.setAttribute("transform", default_attr + value);
+    p2.setAttribute("transform", default_attr + value);
+}
+</script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+</body>
+</html>
